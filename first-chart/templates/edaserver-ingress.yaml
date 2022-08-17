@@ -1,0 +1,34 @@
+kind: NetworkPolicy
+apiVersion: networking.k8s.io/v1
+metadata:
+  namespace: webfocus
+  name: edaserver-ingress
+spec:
+  podSelector:
+    matchLabels:
+      app.kubernetes.io/name: edaserver
+  ingress:
+  - ports:
+    - port: 8120
+      protocol: TCP
+    - port: 8121
+      protocol: TCP
+    from:
+     - podSelector:
+         matchLabels:
+           app.kubernetes.io/name: appserver  
+  - ports:
+    - port: 8120
+      protocol: TCP
+    from:
+     - podSelector:
+         matchLabels:
+           app.kubernetes.io/name: clm
+  - from:
+    - podSelector:
+        matchLabels:
+          app.kubernetes.io/name: reportcaster
+
+
+
+

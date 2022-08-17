@@ -1,0 +1,17 @@
+kind: NetworkPolicy
+apiVersion: networking.k8s.io/v1
+metadata:
+  namespace: webfocus
+  name: reportcaster-ingress
+spec:
+  podSelector:
+    matchLabels:
+      app.kubernetes.io/name: reportcaster
+  ingress:
+  - ports:
+    - port: 8200
+      protocol: TCP
+    from:
+    - podSelector:
+        matchLabels:
+          app.kubernetes.io/name: appserver

@@ -1,0 +1,17 @@
+kind: NetworkPolicy
+apiVersion: networking.k8s.io/v1
+metadata:
+  namespace: webfocus
+  name: cachemanager-ingress
+spec:
+  podSelector:
+    matchLabels:
+      app.kubernetes.io/name: cachemanager
+  ingress:
+  - ports:
+    - port: 8090
+      protocol: TCP
+    from:
+    - podSelector:
+        matchLabels:
+          app.kubernetes.io/name: edaserver

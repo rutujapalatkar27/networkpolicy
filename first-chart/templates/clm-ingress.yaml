@@ -1,0 +1,17 @@
+kind: NetworkPolicy
+apiVersion: networking.k8s.io/v1
+metadata:
+  namespace: webfocus
+  name: clm-ingress
+spec:
+  podSelector:
+    matchLabels:
+      app.kubernetes.io/name: clm
+  ingress:
+  - from:
+    - podSelector:
+        matchLabels:
+          app.kubernetes.io/name: appserver
+    - podSelector:
+        matchLabels:
+          app.kubernetes.io/name: edaserver
